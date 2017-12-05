@@ -46,11 +46,15 @@ if (repoOwner != undefined && repoName != undefined) {
         downloadImageByURL(avatarUrl, 'avatars/' + item.login + '.jpeg');
       });
       } else {
-        console.log('ERROR: Check your repo or owner name')
+        border();
+        console.log('ERROR: Check your repo or owner name');
+        border();
       }
     });
   }
-
+var border = function(){
+  console.log('------------------------------------')
+}
 
 //call the function
   getRepoContributors(repoOwner, repoName, function() {});
