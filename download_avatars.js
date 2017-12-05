@@ -5,7 +5,7 @@ var repoOwner = process.argv[2];
 var repoName = process.argv[3];
 
 console.log('Welcome to the GitHub Avatar Downloader!');
-
+if (repoOwner != undefined && repoName != undefined) {
 function downloadImageByURL(url, filePath) {
   request.get(url, filePath)
     .on('error', function (err) {
@@ -40,4 +40,6 @@ function getRepoContributors(repoOwner, repoName, cb) {
 getRepoContributors(repoOwner, repoName, function(err, result) {
   console.log("Downloading...");
 });
-
+} else {
+  console.log('Please define repo owner and name...')
+}
