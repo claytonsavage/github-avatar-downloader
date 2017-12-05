@@ -12,8 +12,10 @@ console.log('Welcome to the GitHub Avatar Downloader!');
 if (repoOwner != undefined && repoName != undefined) {
 //download the image to the avatars folder
   console.log("Downloading...");
+
   function downloadImageByURL(url, filePath) {
-    request.get(url, filePath)
+    request
+      .get(url, filePath)
       .on('error', function (err) {
         console.log(err);
         throw err;
@@ -37,12 +39,19 @@ if (repoOwner != undefined && repoName != undefined) {
 //download the image to the avatars folder using the users login for the name
     request(options, function(err, res, body) {
       cb(err, body);
+      if (body.message != 'Not Found') {
       body.forEach(function(item){
         avatarUrl = item.avatar_url;
+//call downloadImageByURL function
         downloadImageByURL(avatarUrl, 'avatars/' + item.login + '.jpeg');
       });
+      } else {
+        console.log('ERROR: Check your repo or owner name')
+      }
     });
   }
+
+
 //call the function
   getRepoContributors(repoOwner, repoName, function() {});
 // if information missing tell the user to add the repo owner and name
